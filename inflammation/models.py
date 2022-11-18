@@ -80,6 +80,7 @@ class Observation:
     value: float
         The value of the inflammation recorded during the observation.
     """
+
     def __init__(self, day, value):
         self.day = day
         self.value = value
@@ -98,6 +99,7 @@ class Person:
     name: str
         The name of the person
     """
+
     def __init__(self, name) -> None:
         self.name = name
 
@@ -114,6 +116,7 @@ class Doctor(Person):
     add_patient(self, patient):
         Appends a patient to the list of patients cared for by the Doctor
     """
+
     def __init__(self, name) -> None:
         super().__init__(name)
         self.patients = []
@@ -128,7 +131,7 @@ class Patient(Person):
     Attributes:
     observations: List[observations]
         A list of observations for this patient, in the form Day : Value
-    
+
     Methods:
     add_observation(self, value, day):
         Adds an observation to the list of the patient's observations.
@@ -136,6 +139,7 @@ class Patient(Person):
         Or otherwise it is the previous day iterated by 1.
 
     """
+
     def __init__(self, name, observations=None) -> None:
         super().__init__(name)
         self.observations = []
