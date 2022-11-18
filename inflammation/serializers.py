@@ -6,32 +6,46 @@ import csv
 
 
 class Serializer(ABC):
+    """ Abstract Base Class (ABC), only used by creating
+        subclasses of it. Templates for other serializers,
+        and will give an error if templates are not used
+        for other serializers.
+    """
+
     @classmethod
     @abstractmethod
     def serialize(cls, instances):
+        """ Serialize template """
         raise NotImplementedError
 
     @classmethod
     @abstractmethod
     def save(cls, instances, path):
+        """ Save template """
         raise NotImplementedError
 
     @classmethod
     @abstractmethod
     def deserialize(cls, data):
+        """ Deserialize template """
         raise NotImplementedError
 
     @classmethod
     @abstractmethod
     def load(cls, path):
+        """ Load template """
         raise NotImplementedError
 
 
 class ObservationSerializer(Serializer):
     model = models.Observation
+    """ Serialize and deserialize Observation
+        objects using Serializer templates.
+    """
 
     @classmethod
     def serialize(cls, instances):
+        """ Serializes """
         return [{
             'day': instance.day,
             'value': instance.value,
@@ -39,14 +53,19 @@ class ObservationSerializer(Serializer):
 
     @classmethod
     def deserialize(cls, data):
+        """ Deserializes """
         return [cls.model(**d) for d in data]
 
 
 class PatientSerializer:
     model = models.Patient
+    """ Serialize and deserialize Patient
+        objects using Serializer templates.
+    """
 
     @classmethod
     def serialize(cls, instances):
+        """ Serializes """
         return [{
             'name': instance.name,
             'observations': ObservationSerializer.serialize(instance.observations),
@@ -54,6 +73,7 @@ class PatientSerializer:
 
     @classmethod
     def deserialize(cls, data):
+        """ Deserializes """
         instances = []
 
         for item in data:
@@ -64,13 +84,16 @@ class PatientSerializer:
 
 
 class PatientJSONSerializer(PatientSerializer):
+    """ Serializes patient for JSON """
     @classmethod
     def save(cls, instances, path):
+        """ Saves """
         with open(path, 'w') as jsonfile:
             json.dump(cls.serialize(instances), jsonfile)
 
     @classmethod
     def load(cls, path):
+        """ Loads """
         with open(path) as jsonfile:
             data = json.load(jsonfile)
 
@@ -78,8 +101,10 @@ class PatientJSONSerializer(PatientSerializer):
 
 
 class PatientCSVSerializer(PatientSerializer):
+    """ Serializes patient for VCSV """
     @classmethod
     def save(cls, instances, path):
+        """ Saves """
         with open(path, 'w') as csvfile:
             writer = csv.writer(csvfile)
             records = cls.serialize(instances)
@@ -95,6 +120,7 @@ class PatientCSVSerializer(PatientSerializer):
 
     @classmethod
     def load(cls, path):
+        """ Loads """
         data = []
         with open(path, 'r') as csvfile:
             reader = csv.reader(csvfile)
