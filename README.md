@@ -39,6 +39,10 @@ The following optional packages are required to run Inflam's unit tests:
 1. Adding a new patient: `python3 inflammation-analysis.py --view new-patient --patientname Bob --serializer csv data/patients.csv`.
 1. Adding a new observation for that patient: `python3 inflammation-analysis.py --view new-observation --patientname Bob --observation 5 --serializer csv data/patients.csv`.
 
+## Development
+
+1. Run `black .` and `isort .` before committing.
+
 ## TODO
 
 - Contributing: for those wishing to contribute to the software’s development, this is an opportunity to detail what kinds of contribution are sought and how to get involved
