@@ -4,7 +4,7 @@
 def test_create_person():
     from inflammation.models import Person
 
-    name = 'Alice'
+    name = "Alice"
     p = Person(name=name)
 
     assert p.name == name
@@ -13,7 +13,7 @@ def test_create_person():
 def test_create_patient():
     from inflammation.models import Patient
 
-    name = 'Alice'
+    name = "Alice"
     p = Patient(name=name)
 
     assert p.name == name
@@ -22,7 +22,7 @@ def test_create_patient():
 def test_create_doctor():
     from inflammation.models import Doctor
 
-    name = 'Alice'
+    name = "Alice"
     d = Doctor(name=name)
 
     assert d.name == name
@@ -32,7 +32,7 @@ def test_create_doctor():
 def test_add_patient():
     from inflammation.models import Doctor, Patient
 
-    name = 'Alice'
+    name = "Alice"
     d = Doctor(name=name)
 
     p1 = Patient(name="Bob")

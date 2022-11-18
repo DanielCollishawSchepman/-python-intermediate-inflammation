@@ -16,7 +16,7 @@ def load_csv(filename):
     :param filename: Filename of CSV to load.
     :returns: Numpy array of the CSV data.
     """
-    return np.loadtxt(fname=filename, delimiter=',')
+    return np.loadtxt(fname=filename, delimiter=",")
 
 
 def daily_mean(data):
@@ -55,16 +55,16 @@ def patient_normalise(data):
     Negative values are rounded to 0.
     """
     if np.any(data < 0):
-        raise ValueError('Inflammation values should not be negative')
+        raise ValueError("Inflammation values should not be negative")
 
     if type(data) is not np.ndarray:
-        raise TypeError('Input data should be a numpy array.')
+        raise TypeError("Input data should be a numpy array.")
 
     if len(np.shape(data)) != 2:
-        raise TypeError('Input data should be a 2D array.')
+        raise TypeError("Input data should be a 2D array.")
 
     maxima = np.nanmax(data, axis=1)
-    with np.errstate(invalid='ignore', divide='ignore'):
+    with np.errstate(invalid="ignore", divide="ignore"):
         normalised = data / maxima[:, np.newaxis]
     normalised[np.isnan(normalised)] = 0
     normalised[normalised < 0] = 0
@@ -116,11 +116,11 @@ class Patient(Person):
 
         self.observations.append(new_observation)
         return new_observation
-    
+
     def __eq__(self, other):
         if self.name != other.name:
             return False
-        
+
         for self_obs, other_obs in zip(self.observations, other.observations):
             if self_obs == other_obs:
                 continue
