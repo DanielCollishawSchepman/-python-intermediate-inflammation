@@ -11,8 +11,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.8, 3.11]
+        os: [ubuntu-latest]
+        python-version: [3.11]
 
     # a job is a seq of steps
     steps:
@@ -32,6 +32,9 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
         pip3 install -e .
+
+    - name: Python Lint (isort/black)
+      uses: wrboyce/python-lint-action@v1.0.0
 
     - name: Test with PyTest
       run: |
