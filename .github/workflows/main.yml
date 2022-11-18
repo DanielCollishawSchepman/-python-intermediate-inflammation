@@ -33,9 +33,11 @@ jobs:
         pip3 install -r requirements.txt
         pip3 install -e .
 
-    - name: Python Lint (isort/black)
-      uses: wrboyce/python-lint-action@v1.0.0
-
+    - name: Python Black
+      uses: cytopia/docker-black@0.8
+      with:
+        path: '.'
+  
     - name: Test with PyTest
       run: |
         pytest --cov=inflammation.models tests/test_models.py
