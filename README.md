@@ -24,12 +24,13 @@ The following optional packages are required to run Inflam's unit tests:
 
 - [pytest](https://docs.pytest.org/en/stable/) - Inflam's unit tests are written using pytest
 - [pytest-cov](https://pypi.org/project/pytest-cov/) - Adds test coverage stats to unit testing
+- Use `pip install -e . ` to install the directory as a package to use with pytest.
 
 ## Installation
 
-1. Create a virtual environment: `python3 -m venv venv`.
-1. Activate the virutal environment: `source ./venv/bin/activate`.
-1. Install the requirements: `pip -r requirements.txt`.
+1. Create a virtual environment within the python-intermediate-inflammation directory: `python3 -m venv venv`.
+2. Activate the virutal environment: `source ./venv/bin/activate`.
+3. Install the requirements: `pip install -r requirements.txt`.
 
 ## Basic usage
 
