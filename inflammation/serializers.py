@@ -1,8 +1,8 @@
-from inflammation import models
-
-from abc import ABC, abstractmethod
-import json
 import csv
+import json
+from abc import ABC, abstractmethod
+
+from inflammation import models
 
 
 class Serializer(ABC):
@@ -46,10 +46,9 @@ class ObservationSerializer(Serializer):
     @classmethod
     def serialize(cls, instances):
         """ Serializes """
-        return [{
-            'day': instance.day,
-            'value': instance.value,
-        } for instance in instances]
+        return [
+            {"day": instance.day, "value": instance.value} for instance in instances
+        ]
 
     @classmethod
     def deserialize(cls, data):
@@ -66,10 +65,13 @@ class PatientSerializer:
     @classmethod
     def serialize(cls, instances):
         """ Serializes """
-        return [{
-            'name': instance.name,
-            'observations': ObservationSerializer.serialize(instance.observations),
-        } for instance in instances]
+        return [
+            {
+                "name": instance.name,
+                "observations": ObservationSerializer.serialize(instance.observations),
+            }
+            for instance in instances
+        ]
 
     @classmethod
     def deserialize(cls, data):
@@ -77,7 +79,9 @@ class PatientSerializer:
         instances = []
 
         for item in data:
-            item['observations'] = ObservationSerializer.deserialize(item.pop('observations'))
+            item["observations"] = ObservationSerializer.deserialize(
+                item.pop("observations")
+            )
             instances.append(cls.model(**item))
 
         return instances
@@ -85,10 +89,11 @@ class PatientSerializer:
 
 class PatientJSONSerializer(PatientSerializer):
     """ Serializes patient for JSON """
+
     @classmethod
     def save(cls, instances, path):
         """ Saves """
-        with open(path, 'w') as jsonfile:
+        with open(path, "w") as jsonfile:
             json.dump(cls.serialize(instances), jsonfile)
 
     @classmethod
@@ -102,10 +107,11 @@ class PatientJSONSerializer(PatientSerializer):
 
 class PatientCSVSerializer(PatientSerializer):
     """ Serializes patient for VCSV """
+
     @classmethod
     def save(cls, instances, path):
         """ Saves """
-        with open(path, 'w') as csvfile:
+        with open(path, "w") as csvfile:
             writer = csv.writer(csvfile)
             records = cls.serialize(instances)
             for patient in records:
@@ -113,29 +119,33 @@ class PatientCSVSerializer(PatientSerializer):
                     writer.writerow([patient["name"]])
                 else:
                     data = [[patient["name"]]]
-                    data += [[int(dicti["day"]), int(dicti["value"])] for dicti in patient["observations"]]
+                    data += [
+                        [int(dicti["day"]), int(dicti["value"])]
+                        for dicti in patient["observations"]
+                    ]
                     data = [item for sublist in data for item in sublist]
                     writer.writerow(data)
-
 
     @classmethod
     def load(cls, path):
         """ Loads """
         data = []
-        with open(path, 'r') as csvfile:
+        with open(path, "r") as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
                 if len(row) < 2:
-                    data += [{
-                        "name": row[0],
-                        "observations": []
-                    }]
+                    data += [{"name": row[0], "observations": []}]
                     continue
 
-                record = [{
+                record = [
+                    {
                         "name": row[0],
-                        "observations": [{"day": int(row[i]), "value": int(row[i+1])} for i in range(1, len(row) - 1, 2)]
-                    }]
+                        "observations": [
+                            {"day": int(row[i]), "value": int(row[i + 1])}
+                            for i in range(1, len(row) - 1, 2)
+                        ],
+                    }
+                ]
 
                 data += record
 
