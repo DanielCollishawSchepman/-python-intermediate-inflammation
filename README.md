@@ -28,16 +28,16 @@ The following optional packages are required to run Inflam's unit tests:
 ## Installation
 
 1. Create a virtual environment: `python3 -m venv venv`.
-1. Activate the virutal environment: `source ./venv/bin/activate`.
-1. Install the requirements: `pip -r requirements.txt`.
+2. Activate the virutal environment: `source ./venv/bin/activate`.
+3. Install the requirements: `pip -r requirements.txt`.
 
 ## Basic usage
 
 1. Create a file to store patient data.
     - E.g., `touch data/patients.csv`.
     - E.g., `touch data/patients.json`.
-1. Adding a new patient: `python3 inflammation-analysis.py --view new-patient --patientname Bob --serializer csv data/patients.csv`.
-1. Adding a new observation for that patient: `python3 inflammation-analysis.py --view new-observation --patientname Bob --observation 5 --serializer csv data/patients.csv`.
+2. Adding a new patient: `python3 inflammation-analysis.py --view new-patient --patientname Bob --serializer csv data/patients.csv`.
+3. Adding a new observation for that patient: `python3 inflammation-analysis.py --view new-observation --patientname Bob --observation 5 --serializer csv data/patients.csv`.
 
 ## Development
 
