@@ -28,24 +28,26 @@ The following optional packages are required to run Inflam's unit tests:
 ## Installation
 
 1. Create a virtual environment: `python3 -m venv venv`.
-1. Activate the virutal environment: `source ./venv/bin/activate`.
-1. Install the requirements: `pip -r requirements.txt`.
+2. Activate the virutal environment: `source ./venv/bin/activate`.
+3. Install the requirements: `pip -r requirements.txt`.
 
 ## Basic usage
 
 1. Create a file to store patient data.
     - E.g., `touch data/patients.csv`.
     - E.g., `touch data/patients.json`.
-1. Adding a new patient: `python3 inflammation-analysis.py --view new-patient --patientname Bob --serializer csv data/patients.csv`.
-1. Adding a new observation for that patient: `python3 inflammation-analysis.py --view new-observation --patientname Bob --observation 5 --serializer csv data/patients.csv`.
+2. Adding a new patient: `python3 inflammation-analysis.py --view new-patient --patientname Bob --serializer csv data/patients.csv`.
+3. Adding a new observation for that patient: `python3 inflammation-analysis.py --view new-observation --patientname Bob --observation 5 --serializer csv data/patients.csv`.
 
 ## Development
 
 1. Run `black .` and `isort .` before committing.
 
-## TODO
+## Contact information
+* Author: Daniel Collishaw-schepman - daniel.collishaw-schepman@ukaea.uk
+* Resources for this project: [the Software Carpentry course, UKAEA version](https://codimd.carpentries.org/ukaea-int-soft-dev-20221103#Intermediate-Research-Software-Development-in-Python)
 
-- Contributing: for those wishing to contribute to the software’s development, this is an opportunity to detail what kinds of contribution are sought and how to get involved
+## Contributing
+* For those wishing to contribute to the software’s development, this is an opportunity to detail what kinds of contribution are sought and how to get involved.
+* Enter you ideas in `contributions.txt` in this directory
 - Contact information/getting help: which may include things like key author email addresses, and links to mailing lists and other resources
-- Credits/Acknowledgements: where appropriate, be sure to credit those who have helped in the software’s development or inspired it
-- Citation: particularly for academic software, it’s a very good idea to specify a reference to an appropriate academic publication so other academics can cite use of the software in their own publications and media. You can do this within a separate CITATION text file within the repository’s root directory and link to it from the markdown
